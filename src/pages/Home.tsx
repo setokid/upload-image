@@ -1,11 +1,11 @@
 import React from "react";
-import "./Home.css";
+import "./style.css";
 
 const Home: React.FC = () => {
   return (
     <>
       <div className="container">
-        <div className="header">Page này dùng để tế thằng loz này</div>
+        <p className="title">Page này dùng để tế thằng loz này</p>
         <img
           src="https://i.imgur.com/xHAWHTB.jpg"
           alt="pokemon"
