@@ -29,7 +29,10 @@ const RootRoute: React.FC = () => {
               <a href={`Home`}>Home</a>
             </li>
             <li>
-              <a href={`FileUpload`}>FileUpload</a>
+              <a href={`FileUpload`}>File Upload</a>
+            </li>
+            <li>
+              <a href={`FileList`}>File List</a>
             </li>
           </ul>
         </nav>

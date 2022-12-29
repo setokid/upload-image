@@ -10,6 +10,10 @@
     min-height: 230px;
 }
 
+.file-card.dragover{
+    opacity: 0.6;
+}
+
 .file-inputs{
     position: relative;
     margin-bottom: 1.5em;
@@ -63,6 +67,11 @@
 
 button:hover{
     background-color: #f15120;
+}
+
+.file-info {
+    line-height: 0.7rem;
+    padding-bottom: 1rem;
 }
 
 .main{
