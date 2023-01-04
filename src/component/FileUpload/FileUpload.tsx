@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./FileUpload.css";
-import axios from "axios";
+import { uploadFile } from "../../util/http";
 
 const FileUpload: React.FC = () => {
-  const [file, setFile] = useState<any>(null);
-  const [showAlert, setShowAlert] = useState<Boolean>(false);
+  const [file, setFile] = useState<any>();
+  const [showAlert, setShowAlert] = useState<number>();
   const wrapperRef: any = useRef(null);
 
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
@@ -22,20 +22,8 @@ const FileUpload: React.FC = () => {
     if (files) {
       const formData = new FormData();
       formData.append("file", file.data);
-      await axios({
-        method: "post",
-        url: "http://103.90.227.114:8080/upload",
-        data: formData,
-      })
-        .then(function (res) {
-          if (res.status === 200) {
-            setShowAlert(true);
-          }
-          console.log("res", res.status);
-        })
-        .catch(function (response) {
-          console.log("err", response);
-        });
+      const upload = await uploadFile(formData);
+      setShowAlert(upload);
     }
   };
 
@@ -50,20 +38,8 @@ const FileUpload: React.FC = () => {
     if (files) {
       const formData = new FormData();
       formData.append("file", file.data);
-      await axios({
-        method: "post",
-        url: "http://103.90.227.114:8080/upload",
-        data: formData,
-      })
-        .then(function (res) {
-          if (res.status === 200) {
-            setShowAlert(true);
-          }
-          console.log("res", res.status);
-        })
-        .catch(function (response) {
-          console.log("err", response);
-        });
+      const upload = await uploadFile(formData);
+      setShowAlert(upload);
     }
     wrapperRef.current.classList.add("dragover");
   };
@@ -95,7 +71,8 @@ const FileUpload: React.FC = () => {
           <p className="info">PDF,JPG,PNG....</p>
         </div>
       </div>
-      {showAlert && alert("Upload Success")}
+      {showAlert === 200 ? alert("Upload Success") : <></>}
+      {showAlert === 500 ? alert("Upload fail") : <></>}
     </>
   );
 };

@@ -1,36 +1,45 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-interface Files {
-  id: string;
-  mimeType: string;
-  name: string;
-}
+import { File, NextPageToken } from "../component/interface";
+import { listEverything } from "../util/http";
 
 const ListFile: React.FC = () => {
-  const [file, setFile] = useState<Files[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  useEffect(() => {
-    let mounted = true;
-    const getFiles = async () => {
-      const res = await axios.get("http://103.90.227.114:8080/?pagesize=999");
-      if (mounted) {
-        setFile(res.data.files);
-      }
-    };
-    getFiles();
-    return () => {
-      mounted = false;
-    };
+  const [file, setFile] = useState<File[]>([]);
+  const [nextPageToken, setNextPageToken] = useState<NextPageToken>({
+    nextPageToken: "",
   });
+  const [loading, setLoading] = useState<boolean>(true);
+  console.log(nextPageToken);
+
+  useEffect(() => {
+    let cleanup = true;
+    async function getFiles() {
+      if (cleanup) {
+        let fileList = await listEverything(nextPageToken);
+        setFile(fileList.files);
+        setNextPageToken(fileList.nextPageToken);
+      }
+    }
+
+    getFiles();
+
+    return () => {
+      cleanup = false;
+    };
+  }, []);
 
   return (
-    <div>
+    <div className="file-list-container">
       {file.map((file) => {
         return (
-          <div>
-            <p>{file.id}</p>
-            <p>{file.name}</p>
+          <div key={file.id} className="image-container">
+            <img
+              className="img"
+              src={"https://drive.google.com/thumbnail?id=" + file.id}
+              alt="drive img"
+            />
+            <a href={"https://drive.google.com/file/d/" + file.id}>
+              {file.name}
+            </a>
           </div>
         );
       })}
