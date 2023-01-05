@@ -5,6 +5,6 @@ export interface File {
 }
 
 export interface NextPageToken{
-    nextPageToken?: string
+    nextPageToken: string
 }
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { File, NextPageToken } from "../component/interface";
+import { NextPageToken } from "../component/interface";
 
 const BASEURL = "http://103.90.227.114:8080/google-drive";
 
@@ -18,11 +18,11 @@ export async function uploadFile(formData: FormData) {
 export async function listEverything(nextPageToken: NextPageToken) {
   const res = await axios
     .get(BASEURL + "/?pagesize=10", {
-      data: {
-        nextPageToken: nextPageToken,
-      },
+      nextPageToken: nextPageToken,
     })
     .then(function (res) {
+      console.log("res", res);
+
       return res;
     })
     .catch((err) => {
