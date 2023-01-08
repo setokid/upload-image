@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./FileUpload.css";
-import { uploadFile } from "../../util/http";
+import { uploadFile } from "../../configs/http";
 
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<any>();

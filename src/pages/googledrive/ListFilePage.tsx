@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { File, NextPageToken } from "../component/interface";
-import { listEverything } from "../util/http";
-import Loading from "../component/Loading/Loading";
-import FileListView from "../component/FileListView/FileListView";
+import { File, NextPageToken } from "../../components/interface";
+import { listEverything } from "../../configs/http";
+import Loading from "../../components/Loading/Loading";
+import FileListView from "../../components/FileListView/FileListView";
 
 const ListFile: React.FC = () => {
   const [file, setFile] = useState<File[]>([]);
   const [nextPageToken, setNextPageToken] = useState<NextPageToken>({
-    nextPageToken: "",
+    nextPageToken: "asdasd",
   });
 
   const [loading, setLoading] = useState<boolean>(true);

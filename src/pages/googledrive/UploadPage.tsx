@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import "./style.css";
-import FileUpload from "../component/FileUpload/FileUpload";
+import "../style.css";
+import FileUpload from "../../components/FileUpload/FileUpload";
 const ImageUpload: React.FC = () => {
   return (
-    <div className="container">
+    <div className="file-upload-container">
       <p className="title">Upload file</p>
       <FileUpload />
     </div>

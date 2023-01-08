@@ -8,6 +8,7 @@
     background-color: #edf2f7;
     min-width: 380px;
     min-height: 230px;
+    width: 30%;
 }
 
 .file-card.dragover{
